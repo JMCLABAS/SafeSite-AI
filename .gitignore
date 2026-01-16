@@ -1,0 +1,11 @@
+# Ignorar entorno y archivos temporales
+venv/
+__pycache__/
+*.pyc
+.DS_Store
+
+# Ignorar Datasets y Modelos (Son muy pesados)
+data/
+models/
+runs/
+*.pt
