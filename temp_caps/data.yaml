@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 2
+names: ['cap', 'nocap']
+
+roboflow:
+  workspace: rod-h5cue
+  project: hat-detection-rtwdg
+  version: 2
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/rod-h5cue/hat-detection-rtwdg/dataset/2
