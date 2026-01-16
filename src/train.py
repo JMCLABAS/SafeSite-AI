@@ -1,8 +1,10 @@
 from ultralytics import YOLO
 import os
 
+#.\venv\Scripts\activate
+
 def main():
-    # Rutas dinámicas (Clean Code)
+    # Rutas dinámicas 
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     yaml_path = os.path.join(base_dir, 'data', 'data.yaml')
     models_dir = os.path.join(base_dir, 'models')
@@ -22,13 +24,13 @@ def main():
         data=yaml_path,
         epochs=50,
         imgsz=640,
-        batch=8,           # Ajustado para tu GPU 3050
+        batch=8,           # Ajustado para mi GPU 3050
         device=0,
         patience=15,       # Early stopping si no mejora
         optimizer='AdamW',
         lr0=0.001,
         project=models_dir,      # Guardar ordenado en /models
-        name='SafeSite-AI_v1', # Nombre profesional
+        name='SafeSite-AI_v1', # Nombre 
         exist_ok=True,
         verbose=True
     )

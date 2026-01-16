@@ -20,7 +20,7 @@ def main():
     cap.set(3, 1280)
     cap.set(4, 720)
 
-    print("🎥 Monitor activo. Pulsa 'Q' para cerrar el sistema.")
+    print("🎥 Monitor activo. Pulsa 'ESC' para cerrar el sistema.")
 
     while True:
         success, img = cap.read()
@@ -28,8 +28,8 @@ def main():
             break
 
         # INFERENCIA AVANZADA
-        # conf=0.5: Solo alertas seguras
-        # agnostic_nms=True: Evita duplicados (Gorra vs Casco)
+        # conf=0.5: Solo mostramos detecciones con >50% de seguridad
+        # agnostic_nms=True: Evita cajas duplicadas (ej: Cabeza y Casco a la vez)
         results = model(img, stream=True, verbose=False, conf=0.5, agnostic_nms=True)
 
         for r in results:
@@ -39,30 +39,45 @@ def main():
                 conf = round(float(box.conf[0]), 2)
                 cls_name = model.names[int(box.cls[0])]
 
-                # --- REGLAS DE NEGOCIO ---
-                color = (200, 200, 200) # Gris por defecto
-                label = f"{cls_name} {conf}"
+                # --- REGLAS DE NEGOCIO (EPP) ---
                 draw = False
+                color = (200, 200, 200) # Gris por defecto
+                label = f"{cls_name}"
 
+                # 1. CASCOS (Cabeza)
                 if cls_name == 'Hardhat':
-                    color = (0, 255, 0) # Verde (Cumple norma)
+                    color = (0, 255, 0)   # VERDE
+                    label = f"✅ CASCO: {conf}"
                     draw = True
                 elif cls_name in ['NO-Hardhat', 'No-Helmet', 'Head']:
-                    color = (0, 0, 255) # Rojo (Infracción)
-                    label = f"⚠️ SIN CASCO: {conf}"
+                    color = (0, 0, 255)   # ROJO
+                    label = f"⛔ SIN CASCO: {conf}"
                     draw = True
                 
-                # Renderizado condicional (Solo dibujamos lo importante)
+                # 2. CHALECOS (Tronco)
+                elif cls_name == 'Safety Vest':
+                    color = (0, 255, 0)   # VERDE
+                    label = f"✅ CHALECO: {conf}"
+                    draw = True
+                elif cls_name == 'NO-Safety Vest':
+                    color = (0, 0, 255)   # ROJO
+                    label = f"⛔ SIN CHALECO: {conf}"
+                    draw = True
+
+                # Renderizado condicional
                 if draw:
-                    cv2.rectangle(img, (x1, y1), (x2, y2), color, 2)
-                    # Fondo para el texto
+                    # Caja
+                    cv2.rectangle(img, (x1, y1), (x2, y2), color, 3)
+                    
+                    # Etiqueta con fondo sólido para lectura fácil
                     (w, h), _ = cv2.getTextSize(label, cv2.FONT_HERSHEY_SIMPLEX, 0.6, 2)
                     cv2.rectangle(img, (x1, y1 - 25), (x1 + w, y1), color, -1)
                     cv2.putText(img, label, (x1, y1 - 6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
 
-        cv2.imshow("SafeSite AI - Panel de Control", img)
+        cv2.imshow("SafeSite AI - Monitor EPP", img)
 
-        if cv2.waitKey(1) & 0xFF == ord('q'):
+        # Salir con ESC (Código ASCII 27)
+        if cv2.waitKey(1) & 0xFF == 27:
             break
 
     cap.release()
