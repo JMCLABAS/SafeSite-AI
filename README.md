@@ -28,8 +28,8 @@ Este proyecto demuestra la implementación de un flujo de trabajo profesional en
 * **Visión por Computador:** `OpenCV` para captura de video, pre-procesamiento de frames y renderizado de la interfaz gráfica (UI).
 
 ### Datos & Entrenamiento
-* **Dataset:** Fusión de "Construction Site Safety v30" (Roboflow) + Dataset personalizado de "Hats/Caps" para reducción de falsos positivos.
-* **Etiquetado:** `LabelImg` para corrección manual y re-etiquetado de clases conflictivas.
+* **Dataset:** Fusión de "Construction Site Safety v30" (Roboflow) + Hat detection (Roboflow)" para reducción de falsos positivos.
+* **Etiquetado:** re-etiquetado de clases conflictivas.
 * **Entorno:** Gestión de dependencias mediante `venv` y aceleración por GPU (CUDA) con PyTorch.
 
 ---
