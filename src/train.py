@@ -30,7 +30,7 @@ def main():
         optimizer='AdamW',
         lr0=0.001,
         project=models_dir,      # Guardar ordenado en /models
-        name='SafeSite-AI_v1', # Nombre 
+        name='SafeSite-AI_v2', # Nombre 
         exist_ok=True,
         verbose=True
     )

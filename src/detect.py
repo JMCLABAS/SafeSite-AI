@@ -5,7 +5,7 @@ from ultralytics import YOLO
 def main():
     # Ruta dinámica al modelo entrenado
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    model_path = os.path.join(base_dir, 'models', 'SafeSite-AI_v1', 'weights', 'best.pt')
+    model_path = os.path.join(base_dir, 'models', 'SafeSite-AI_v2', 'weights', 'best.pt')
 
     if not os.path.exists(model_path):
         print(f"⚠️ SISTEMA NO INICIADO: No se encuentra el modelo en: {model_path}")
