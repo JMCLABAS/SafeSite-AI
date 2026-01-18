@@ -51,7 +51,15 @@ Transformación de un entorno de scripts de prueba ("código espagueti") a una e
 ---
 
 ## 📸 Galería
+Aquí puedes ver el sistema funcionando en tiempo real. El vídeo está dividido en dos partes para facilitar la visualización:
 
+### Parte 1: Detección de chaleco reflectante de seguridad.
+<video src="https://github.com/user-attachments/assets/ff8daf22-ddfa-4c1b-9efd-e5aaa94ef514" controls="controls" style="max-width: 100%;">
+</video>
+
+### Parte 2: Detección de casco de seguridad, antes se comprueba que el sistema no confunde gorras, gorros ni similares con auténticos cascos de obra.
+<video src="https://github.com/user-attachments/assets/2ccf869e-156a-4318-b63e-60ea9cfb9b4d" controls="controls" style="max-width: 100%;">
+</video>
 
 ---
 
